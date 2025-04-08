@@ -80,12 +80,6 @@ def generate_keys() -> None:
         with open(private_path, "wb") as priv_file:
             priv_file.write(encrypted_private_key)
 
-        # with open(private_path, "wb") as priv_file:
-        #     priv_file.write(private_key.private_bytes(
-        #         encoding=serialization.Encoding.PEM,
-        #         format=serialization.PrivateFormat.PKCS8
-        #     ))
-
         public_path = os.path.join(os.getcwd(), "public_key.pem")
         with open(public_path, "wb") as pub_file:
             pub_file.write(public_key.public_bytes(
