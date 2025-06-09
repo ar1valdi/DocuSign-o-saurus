@@ -17,15 +17,28 @@ def select_key():
         app_state["key_path"] = file_path
 
 
+def select_key_auto():
+    #TODO: Implement
+    pass
+
+def select_out():
+    out_path = filedialog.askdirectory()
+    if out_path:
+        out_label.config(text=out_path)
+        app_state["out_path"] = out_path
+
+
 def sign_pdf():
     pdf = app_state.get("pdf_path")
     key = app_state.get("key_path")
-    if not pdf or not key:
+    out = app_state.get("out_path")
+    pin = pin_var.get()
+    if not pdf or not key or not out or not pin:
         messagebox.showerror("Brak danych", "Wybierz zarówno plik PDF, jak i klucz prywatny.")
         return
 
     try:
-        Encrypter.sign(pdf, key, "123")
+        Encrypter.sign(pdf, key, pin, out)
         messagebox.showinfo("Sukces", "Plik PDF został poprawnie podpisany!")
     except Exception as e:
         messagebox.showerror("Wystąpił błąd: ", str(e))
@@ -44,9 +57,11 @@ def verify_pdf():
         messagebox.showinfo("Sukces", "Weryfikacja pliku PDF zakończona powodzeniem!")
 
 
-app_state = {"pdf_path": str | None, "key_path": str | None}
 
 root = tk.Tk()
+pin_var = tk.StringVar()
+app_state = {"pdf_path": str | None, "key_path": str | None, "out_path": str | None}
+
 root.title("Podpisywacz PDF")
 root.geometry("1000x500")
 
@@ -55,10 +70,22 @@ pdf_btn.pack(pady=10)
 pdf_label = tk.Label(root, text="Nie wybrano pliku PDF")
 pdf_label.pack()
 
-key_btn = tk.Button(root, text="Wybierz klucz prywatny", command=select_key)
+key_btn = tk.Button(root, text="Wybierz klucz", command=select_key)
 key_btn.pack(pady=10)
+aut_key_btn = tk.Button(root, text="Załaduj klucz z pendrive", command=select_key_auto)
+aut_key_btn.pack(pady=10)
 key_label = tk.Label(root, text="Nie wybrano klucza")
 key_label.pack()
+
+out_btn = tk.Button(root, text="Wybierz lokalizację do zapisu", command=select_out)
+out_btn.pack(pady=10)
+out_label = tk.Label(root, text="Nie wybrano ścieżki")
+out_label.pack()
+
+entry_pin = tk.Label(root, text="Enter PIN", pady=10)
+entry_pin.pack()
+entry_pin = tk.Entry(root, textvariable=pin_var, show="*", width=20, justify="center", font=("Courier", 14))
+entry_pin.pack()
 
 sign_btn = tk.Button(root, text="Podpisz PDF", command=sign_pdf)
 sign_btn.pack(pady=10)

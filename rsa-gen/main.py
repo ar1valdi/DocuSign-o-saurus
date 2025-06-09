@@ -68,7 +68,7 @@ def generate_keys() -> None:
         public_key = private_key.public_key()
 
         private_key_bytes = private_key.private_bytes(
-            encoding=serialization.Encoding.DER,
+            encoding=serialization.Encoding.PEM,
             format=serialization.PrivateFormat.PKCS8,
             encryption_algorithm=serialization.NoEncryption()
         )
