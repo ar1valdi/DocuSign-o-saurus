@@ -1,8 +1,12 @@
+## @file main.py
+# @brief GUI for signing and verifying PDF files using RSA keys
+# @details Uses the Encrypter module for cryptographic operations
+
 import tkinter as tk
 import Encrypter
 from tkinter import filedialog, messagebox
 
-
+## @brief Select a PDF file to sign or verify.
 def select_pdf():
     file_path = filedialog.askopenfilename(filetypes=[("Pliki PDF", "*.pdf")])
     if file_path:
@@ -10,6 +14,7 @@ def select_pdf():
         app_state["pdf_path"] = file_path
 
 
+## @brief Select a PEM key file (public/private).
 def select_key():
     file_path = filedialog.askopenfilename(filetypes=[("Pliki kluczy", "*.pem")])
     if file_path:
@@ -21,6 +26,8 @@ def select_key_auto():
     #TODO: Implement
     pass
 
+
+## @brief Choose output directory for signed PDF.
 def select_out():
     out_path = filedialog.askdirectory()
     if out_path:
@@ -28,6 +35,7 @@ def select_out():
         app_state["out_path"] = out_path
 
 
+## @brief Sign the selected PDF using selected private key and PIN.
 def sign_pdf():
     pdf = app_state.get("pdf_path")
     key = app_state.get("key_path")
@@ -44,6 +52,7 @@ def sign_pdf():
         messagebox.showerror("Wystąpił błąd: ", str(e))
 
 
+## @brief Verify the digital signature of the selected PDF.
 def verify_pdf():
     pdf = app_state.get("pdf_path")
     key = app_state.get("key_path")
@@ -57,7 +66,7 @@ def verify_pdf():
         messagebox.showinfo("Sukces", "Weryfikacja pliku PDF zakończona powodzeniem!")
 
 
-
+## GUI Initialization
 root = tk.Tk()
 pin_var = tk.StringVar()
 app_state = {"pdf_path": str | None, "key_path": str | None, "out_path": str | None}
@@ -65,6 +74,7 @@ app_state = {"pdf_path": str | None, "key_path": str | None, "out_path": str | N
 root.title("Podpisywacz PDF")
 root.geometry("1000x500")
 
+# UI Elements
 pdf_btn = tk.Button(root, text="Wybierz plik PDF", command=select_pdf)
 pdf_btn.pack(pady=10)
 pdf_label = tk.Label(root, text="Nie wybrano pliku PDF")

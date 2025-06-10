@@ -1,3 +1,7 @@
+## @file main.py
+# @brief GUI-based RSA key pair generator with AES-encrypted private key.
+# @details This application allows users to generate RSA key pairs, encrypt the private key using a user-defined PIN and AES, and store them securely.
+
 import os
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
@@ -12,28 +16,27 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import secrets
 
 
+## @brief Prompt the user to choose a folder to save the private key.
+# @details Method sets private_path_var variable to the selected path with private_key.pem filename.
 def choose_path():
-    """A function which asks the user to select a directory.
-    \nIt sets the private_path_var variable to the selected path with private_key.pem filename.
-    \nInput: None
-    \nOutput: None"""
     folder = filedialog.askdirectory(title="Choose a directory for the private key")
     if folder:
         full_path = os.path.join(folder, "private_key.pem")
         private_path_var.set(full_path)
 
 
+## @brief Generate SHA256 hash of a PIN.
+# @param pin String input PIN
+# @return Hashed bytes of the key
 def hash_pin(pin: str) -> bytes:
-    """Hashes a pin using sha256
-    \nInput: pin to be hashed (string)
-    \nOutput: bytes object of the key"""
     return hashlib.sha256(pin.encode()).digest()
 
 
+## @brief Encrypts the RSA private key using AES.
+# @param private_key_bytes RSA private key bytes
+# @param key AES encryption key
+# @return Encrypted private key bytes (IV prepended)
 def encrypt_private_key(private_key_bytes: bytes, key: bytes) -> bytes:
-    """Encrypts a private key using AES algorithm
-    \nInput: private key in bytes format, the 256 byte key
-    \nOutput: Encrypted private key with IV at the beginning"""
     iv = secrets.token_bytes(16)
     padder = sym_padding.PKCS7(128).padder()
     padded_data = padder.update(private_key_bytes) + padder.finalize()
@@ -44,12 +47,9 @@ def encrypt_private_key(private_key_bytes: bytes, key: bytes) -> bytes:
     return iv + encrypted
 
 
+## @brief Generates RSA key pair and stores them securely.
+# @details The private key is encrypted using AES and the PIN provided by the user. Private key is saved in the selected directory and public in the working directory. 
 def generate_keys() -> None:
-    """Generates a pair of public and private key using rsa algorithm with 4096 byte key length and saves them.
-    Private key will be saved in the directory the user selected.
-    Public key will be saved in the working directory.
-    \nInput: None
-    \nOutput: None"""
     private_path = private_path_var.get()
     pin = pin_var.get()
     if not private_path:
@@ -93,6 +93,7 @@ def generate_keys() -> None:
         messagebox.showerror("Error", f"An error has occured:\n{e}")
 
 if __name__ == "__main__":
+    ## GUI Setup
     app = tk.Tk()
     app.title("RSA Key Generator")
     app.geometry("600x300")
@@ -101,6 +102,7 @@ if __name__ == "__main__":
     private_path_var = tk.StringVar()
     pin_var = tk.StringVar()
 
+    # UI Elements
     label_info = tk.Label(app, text="1. Choose the private key directory", pady=10)
     label_info.pack()
 

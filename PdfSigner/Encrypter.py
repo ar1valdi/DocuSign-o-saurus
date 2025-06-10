@@ -1,3 +1,6 @@
+## @file Encrypter.py
+# @brief Provides PDF signing, verification and AES decryption functionalities.
+
 import os
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
@@ -6,7 +9,10 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding as sym_padding
 
-
+## @brief Verifies the signature of a PDF file.
+# @param pdf_path Path to the signed PDF
+# @param key_path Path to the public key
+# @return True if verification is successful, otherwise False
 def verify(pdf_path, key_path) -> bool:
     try:
         with open(pdf_path, "rb") as f:
@@ -33,6 +39,11 @@ def verify(pdf_path, key_path) -> bool:
         return False
 
 
+## @brief Signs a PDF with a private key.
+# @param pdf_path Path to the input PDF
+# @param key_path Path to the encrypted private key
+# @param pin_code PIN to decrypt the private key
+# @param result_path Output directory for the signed PDF
 def sign(pdf_path, key_path, pin_code, result_path):
     with open(key_path, "rb") as key_file:
         private_key_bytes = decipher_key(key_file.read(), pin_code)
@@ -53,6 +64,10 @@ def sign(pdf_path, key_path, pin_code, result_path):
         pdf_out.write(signature)
 
 
+## @brief Decrypts AES-encrypted private key using the provided PIN.
+# @param key Encrypted private key
+# @param pin PIN used to generate AES key
+# @return Decrypted private key bytes
 def decipher_key(key: bytes, pin: str) -> bytes:
     try:
         iv = key[:16]

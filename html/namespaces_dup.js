@@ -1,0 +1,46 @@
+var namespaces_dup =
+[
+    [ "Encrypter", "namespace_encrypter.html", [
+      [ "decipher_key", "namespace_encrypter.html#ae9ee1b8a74c32328847e94942670b872", null ],
+      [ "sign", "namespace_encrypter.html#a25cebf493576ac04a645f8de0bd7d1e1", null ],
+      [ "verify", "namespace_encrypter.html#a9a36a9600995ca0edc72cfdbd58d4de3", null ]
+    ] ],
+    [ "main", "namespacemain.html", [
+      [ "choose_path", "namespacemain.html#aa0c411c4a32b76a8f7ee55ccdf940e50", null ],
+      [ "encrypt_private_key", "namespacemain.html#af150d3af53dbe2295793becc1305ec37", null ],
+      [ "generate_keys", "namespacemain.html#aea704944364876cc784fc2b2f3a7b490", null ],
+      [ "hash_pin", "namespacemain.html#a596040c6637ad080e2747de9daecc5c7", null ],
+      [ "select_key", "namespacemain.html#a52d09e9204713ee161fb9bb2e946347a", null ],
+      [ "select_key_auto", "namespacemain.html#a1126ddb5b6fa7e70c9819b5a33c21a03", null ],
+      [ "select_out", "namespacemain.html#a541d7fbc7fcd965e0778d6f33f4b0c00", null ],
+      [ "select_pdf", "namespacemain.html#a83ec2e5eb1c945175b579ea634f7b303", null ],
+      [ "sign_pdf", "namespacemain.html#ae68b76830357342d9dd36e51d383f7b1", null ],
+      [ "verify_pdf", "namespacemain.html#af60c9e5bd7187fc1d161d2f09b7e66a8", null ],
+      [ "app", "namespacemain.html#a5fa94f0581009434c7a63791944d6ff4", null ],
+      [ "app_state", "namespacemain.html#a63e1d9442b01667d1f95b7e7fe7527b3", null ],
+      [ "aut_key_btn", "namespacemain.html#a8fe18a6df3cad6fbfda5a6a1fac2de31", null ],
+      [ "btn_browse", "namespacemain.html#a0b24ff859b8a5bc35506eba55fd1909a", null ],
+      [ "btn_generate", "namespacemain.html#a0b5e6850b0b6cf2bde5b9e91094af19d", null ],
+      [ "entry_path", "namespacemain.html#a47cc61944d50cc11e2633497a403cdb1", null ],
+      [ "entry_pin", "namespacemain.html#a7ea7c1eae6099466a9cd98d6b68426b0", null ],
+      [ "frame_path", "namespacemain.html#a36b60a3336f6e9d9916751444f7929df", null ],
+      [ "key_btn", "namespacemain.html#a708b0f3544bdb863dbcabd36123fce81", null ],
+      [ "key_label", "namespacemain.html#a6557a1148876d71af2c5202e1ff5e459", null ],
+      [ "label_info", "namespacemain.html#ad36dce14678825843f6e4dadc987dcdb", null ],
+      [ "label_step2", "namespacemain.html#a36d1777419e164abff6ba58f620b46a6", null ],
+      [ "label_step3", "namespacemain.html#afa9e3e5c485821542a2d8cd58e79b5f0", null ],
+      [ "LEFT", "namespacemain.html#a0ddef87632cd2146b2f6f3a145ebded5", null ],
+      [ "out_btn", "namespacemain.html#a881ebbf1c6f874cf0be63b596ed08670", null ],
+      [ "out_label", "namespacemain.html#a90bf2a12090fc6c49825da9c22fe0ec8", null ],
+      [ "padx", "namespacemain.html#a857003b412a4994ad56d0a2fa78de5f7", null ],
+      [ "pady", "namespacemain.html#ac3359eeffdf9dd3e5f8b1cad9870744a", null ],
+      [ "pdf_btn", "namespacemain.html#a1c47f03e6a75f136b1bdbdb4a1bce09a", null ],
+      [ "pdf_label", "namespacemain.html#adcfb548f576790d503c4c4f83db84ec0", null ],
+      [ "pin_var", "namespacemain.html#a6e3d461e7278684178d138b7fca0bd9d", null ],
+      [ "private_path_var", "namespacemain.html#a10b51b5eedb7d4a5f1440e33e780b90b", null ],
+      [ "root", "namespacemain.html#aa698d1260ba54f169d55a5630f0f0aa3", null ],
+      [ "side", "namespacemain.html#a7d7af6001e5950e7ef850fec0133b575", null ],
+      [ "sign_btn", "namespacemain.html#a5b4e7e9f8961f7115cd6a42b540707fe", null ],
+      [ "verify_btn", "namespacemain.html#aef5a9cb4d37f6c16b1eb475dde065f72", null ]
+    ] ]
+];
