@@ -1,8 +1,11 @@
 ## @file main.py
 # @brief GUI for signing and verifying PDF files using RSA keys
 # @details Uses the Encrypter module for cryptographic operations
-
+import os.path
 import tkinter as tk
+
+import psutil
+
 import Encrypter
 from tkinter import filedialog, messagebox
 
@@ -22,9 +25,33 @@ def select_key():
         app_state["key_path"] = file_path
 
 
+## @brief Sets path of key on external device as a key path
 def select_key_auto():
-    #TODO: Implement
-    pass
+    external_devices_paths = []
+
+    if os.name == 'nt':
+        partitions = psutil.disk_partitions()
+        for p in partitions:
+            if 'removable' in p.opts.lower():
+                external_devices_paths.append(p.mountpoint)
+    else:
+        potential_mount_points = ['/media', '/mnt', '/Volumes']
+        for p in potential_mount_points:
+            if os.path.exists(p):
+                for base, dirs, files in os.walk(p):
+                    for d in dirs:
+                        path = os.path.join(base, d)
+                        if os.path.ismount(path):
+                            external_devices_paths.append(path)
+
+    for p in external_devices_paths:
+        key_path = os.path.join(p, 'private_key.pem')
+        if os.path.exists(key_path):
+            key_label.config(text=key_path)
+            app_state["key_path"] = key_path
+            return
+
+    key_label.config(text="Nie znaleziono klucza na urządzeniu zewnętrznym")
 
 
 ## @brief Choose output directory for signed PDF.
